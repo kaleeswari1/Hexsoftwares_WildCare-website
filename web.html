@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WildCare–Save Animals</title>
+<style>
+  body{
+  background: #c0ecce;   
+  color: #333;
+}
+:root{
+  --main: #2d6a4f;
+  --light: #b6f7c0;
+  --dark: #081c15;
+  --white: #fafffc;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Comic Sans MS;
+  scroll-behavior: smooth;
+}
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--dark);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  z-index: 9999;
+}
+header {
+  position: sticky;
+  top: 0;
+  background: var(--dark);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 500;
+}
+nav a:hover {
+  color: #95d5b2;
+}
+.hero {
+  height: 90vh;
+  background: url("https://images.alphacoders.com/300/thumb-1920-300181.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+.hero-box {
+  background: rgba(0,0,0,0.65);
+  padding: 40px;
+  color: rgb(255, 255, 255);
+  max-width: 600px;
+  border-radius: 10px;
+}
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  background: var(--main);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #0e754a;
+  transform: scale(1.05);
+}
+.section {
+  padding: 70px 40px;
+  text-align: center;
+}
+.section {
+  padding: 60px 20px;
+  text-align: center;
+  background-color:  lab(94.42% -10.15 -1.28);
+}
+.sub-text {
+  color: #444;
+  margin-bottom: 30px;
+}
+.gallery {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.gallery img {
+  width: 260px;
+  height: 180px;
+  border-radius: 12px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.gallery img:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; 
+  max-width: 500px; 
+  margin: 0 auto; 
+}
+form input, form textarea, form button {
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ffffff;
+  font-size: 16px;
+  width: 100%; 
+  box-sizing: border-box;
+}
+section.details {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+}
+details {
+  background: var(--light); 
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+details[open] {
+  background: #9bdfb4; 
+}
+summary {
+  font-weight: 600;
+  font-size: 18px;
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none; 
+}
+details p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+.mission-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+.mission-images img {
+  width: 260px;
+  height: 180px;
+  border-radius: 15px;
+  object-fit: cover;
+  transition: 0.3s;
+}
+.mission-images img:hover {
+  transform: scale(1.08);
+}
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+.box {
+  background: rgb(255, 255, 255);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.4s;
+}
+.box:hover {
+  transform: translateY(-10px);
+}
+.counter-box {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.counter h2 {
+  font-size: 40px;
+  color: var(--main);
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+#topBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--main);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+body.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+body.dark header,
+body.dark footer {
+  background: black;
+}
+body.dark .box {
+  background: #1e1e1e;
+}
+body.dark .hero-box {
+  background: rgba(0,0,0,0.7);
+}
+#contact p {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+</style>
+</head>
+<body>
+<div id="loader">Loading...</div>
+<header>
+  <h2>WildCare</h2>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#mission">Mission</a>
+    <a href="#donate">Donate</a>
+    <a href="#" onclick="toggleDark()">🌙</a>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-box">
+    <h1>Protect Wildlife. Save the Future.</h1>
+    <p>Join us in creating a safer world for animals.</p>
+    <a href="#donate" class="btn">Join Movement</a>
+  </div>
+</section>
+<section class="section" id="about">
+  <h2>About Us</h2><br>
+  <h3><p>We are a non-profit organization working to protect wildlife and restore natural ecosystems.</p>
+  <p>
+    WildCare is a non-profit organization dedicated to protecting wildlife and preserving nature.
+    We work closely with local communities, volunteers, and environmental experts to rescue
+    injured animals, protect endangered species, and restore natural habitats.
+  </p>
+
+  <p>
+    Our mission is to create awareness, inspire action, and ensure a safe future for animals
+    through education, rescue operations, and sustainable practices.
+  </p></h3>
+</section>
+<section class="section" id="mission">
+  <h2>Our Mission</h2>
+  <div class="mission-images">
+    <img src="https://img.freepik.com/free-vector/hand-drawn-animal-rescue-illustration_23-2150219145.jpg">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBlcboArpaXyPpaKB5tfJ1Ts657mB_YFtv6w&s">
+    <img src="https://img.freepik.com/free-vector/gradient-activism-illustration_23-2150279230.jpg?semt=ais_hybrid&w=740&q=80">
+  </div>
+ <div class="features">
+  <div class="box">
+    <h3>Animal Rescue</h3>
+    <p>
+      We rescue injured, abandoned, and abused animals and provide medical care, shelter,
+      and rehabilitation before rehoming them safely.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>Forest Protection</h3>
+    <p>
+      Our team works to protect forests by preventing illegal deforestation and promoting
+      sustainable environmental practices.
+    </p>
+  </div>
+
+  <div class="box">
+    <h3>Public Awareness</h3>
+    <p>
+      We conduct awareness programs, campaigns, and workshops to educate communities
+      about wildlife conservation.
+    </p>
+  </div>
+</div>
+</section>
+<section class="section">
+  <h2>Our Rescued Animals</h2>
+  <p class="sub-text">Every life matters. These are some of the beautiful souls we rescued.</p>
+
+  <div class="gallery">
+    <img src="data:image/jpeg;base64,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" onclick="openImg(this)">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Iihsz8hFqvrCvYwuCgXN0uDYR5l1HSgIpQ&s" onclick="openImg(this)">
+    <img src="https://static.boredpanda.com/blog/wp-content/uploads/2016/03/rescued-african-lion-sleeping-with-blanket-4.jpg" onclick="openImg(this)">
+  </div>
+</section>
+<section class="section">
+  <h2>Become a Volunteer</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required><br>
+    <input type="email" placeholder="Email" required><br>
+    <textarea placeholder="Why do you want to join?"></textarea><br>
+    <button class="btn">Submit</button><br>
+  </form>
+</section>
+<section class="section">
+  <h2>Frequently Asked Questions</h2>
+  <details>
+    <summary>How can I donate?</summary>
+    <p>You can donate through our secure donation system.</p>
+  </details>
+  <details>
+    <summary>Is my donation safe?</summary>
+    <p>Yes, this is a demo system for learning purposes.</p>
+  </details>
+</section>
+
+
+<section class="section">
+  <div class="counter-box">
+    <div class="counter"><h2 id="c1">0</h2><p>Animals Saved</p></div>
+    <div class="counter"><h2 id="c2">0</h2><p>Volunteers</p></div>
+    <div class="counter"><h2 id="c3">0</h2><p>Campaigns</p></div>
+  </div>
+</section>
+<section class="section" id="donate">
+  <h2>Support Our Cause</h2>
+  <button class="btn" onclick="openModal()">Donate Now</button>
+</section>
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Support Us ❤️</h3>
+    <input type="text" placeholder="Amount" style="width:100%;padding:10px;"><br><br>
+    <button class="btn" onclick="closeModal()">Donate</button>
+  </div>
+</div>
+<button id="topBtn" onclick="scrollToTop()">↑</button>
+<section class="section" id="contact">
+  <h2>Contact Us</h2>
+  <p><strong>Organization:</strong> WildCare – Animal Welfare Organization</p>
+  <p><strong>Founder:</strong> Kaleeswari S</p>
+  <p><strong>Email:</strong> wildcare.support@gmail.com</p>
+  <p><strong>Phone:</strong> +91 9080070006</p>
+  <p><strong>Location:</strong> India</p>
+</section>
+
+<footer>
+  <p>© 2026 WildCare | Save Nature, Save Life</p>
+</footer>
+<script>
+window.onload = () => {
+  document.getElementById("loader").style.display = "none";
+};
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".box").forEach(box => {
+    if (box.getBoundingClientRect().top < window.innerHeight - 100) {
+      box.style.opacity = 1;
+      box.style.transform = "translateY(0)";
+    }
+  });
+  document.getElementById("topBtn").style.display =
+    window.scrollY > 300 ? "block" : "none";
+});
+let c1 = 0, c2 = 0, c3 = 0;
+let counter = setInterval(() => {
+  if (c1 < 250) c1++;
+  if (c2 < 120) c2++;
+  if (c3 < 30) c3++;
+  document.getElementById("c1").innerText = c1;
+  document.getElementById("c2").innerText = c2;
+  document.getElementById("c3").innerText = c3;
+}, 30);
+function openModal() {
+  document.getElementById("modal").style.display = "flex";
+}
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+</body>
+</html>
